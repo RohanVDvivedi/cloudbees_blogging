@@ -1,0 +1,17 @@
+service Blogging {
+    rpc Create(CreateParams) returns (CreateResult) {}
+}
+
+message CreateParams {
+    required string Title = 1;
+    required string Content = 2;
+    required string Author = 3;
+    required string Publication = 4;
+    required string Date = 5;
+    repeated string Tags = 6;
+}
+
+message CreateResult {
+    optional int32 PostId = 1;
+    optional string Error = 2;
+}
