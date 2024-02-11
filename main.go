@@ -129,6 +129,14 @@ func (s *BloggingService) Update(ctx context.Context, params *UpdateParams) (*Up
 	return &UpdateResult{Error: "BLOG NOT FOUND"}, nil
 }
 
+func (s *BloggingService) Delete(ctx context.Context, params *DeleteParams) (*DeleteResult, error) {
+	ok := s.db.Delete(params.PostID)
+	if(ok) {
+		return &DeleteResult{Error: ""}, nil
+	}
+	return &DeleteResult{Error: "BLOG NOT FOUND"}, nil
+}
+
 func main() {
 	//s := BloggingService{db: NewDB()}
 	fmt.Println("Hello World");
