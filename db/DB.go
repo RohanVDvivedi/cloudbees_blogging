@@ -15,14 +15,14 @@ type Blog struct {
 
 type DB struct {
 	Lock sync.Mutex
-	IDsUsed int32 // initialized to 0
+	IDsUsed int32 // initialized to 1
 	Blogs map[int32]Blog
 }
 
 // create a new DB
 func NewDB() *DB {
 	return &DB {
-		IDsUsed: 0,
+		IDsUsed: 1,
 		Blogs: make(map[int32]Blog),
 	}
 }

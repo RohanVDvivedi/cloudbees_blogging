@@ -34,5 +34,5 @@ func main() {
 		Tags: []string{"Tg1", "Tg2"},
 	}
 	rp1, _ := client.Create(context.Background(), &rq1)
-	fmt.Println(rq1, " -> ", rp1);
+	fmt.Println(rq1, " -> ", rp1, _);
 }
