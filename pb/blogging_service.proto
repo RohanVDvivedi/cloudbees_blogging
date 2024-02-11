@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "./main";
+option go_package = "./pb";
 
 service BloggingService {
     rpc Create(CreateParams) returns (CreateResult) {}
