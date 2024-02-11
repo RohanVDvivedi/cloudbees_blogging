@@ -35,6 +35,11 @@ func main() {
 	}
 	rp1, _ := client.Create(context.Background(), &rq1)
 	fmt.Println(rq1, " -> ", rp1)
+	if(rp1.PostID == 1){
+		fmt.Println("PASS")
+	}else{
+		fmt.Println("FAIL")
+	}
 
 	rq2 := pb.CreateParams{
 		Title: "T2",
@@ -45,24 +50,44 @@ func main() {
 	}
 	rp2, _ := client.Create(context.Background(), &rq2)
 	fmt.Println(rq2, " -> ", rp2)
+	if(rp2.PostID == 2){
+		fmt.Println("PASS")
+	}else{
+		fmt.Println("FAIL")
+	}
 
 	rq3 := pb.ReadParams{
 		PostID: 2,
 	}
 	rp3, _ := client.Read(context.Background(), &rq3)
 	fmt.Println(rq3, " -> ", rp3)
+	if(rp3.PostID == 2){
+		fmt.Println("PASS")
+	}else{
+		fmt.Println("FAIL")
+	}
 
 	rq4 := pb.ReadParams{
 		PostID: 1,
 	}
 	rp4, _ := client.Read(context.Background(), &rq4)
 	fmt.Println(rq4, " -> ", rp4)
+	if(rp4.PostID == 1){
+		fmt.Println("PASS")
+	}else{
+		fmt.Println("FAIL")
+	}
 
 	rq5 := pb.ReadParams{
 		PostID: 3,
 	}
 	rp5, _ := client.Read(context.Background(), &rq5)
 	fmt.Println(rq5, " -> ", rp5)
+	if(rp5.Error == "BLOG NOT FOUND"){
+		fmt.Println("PASS")
+	}else{
+		fmt.Println("FAIL")
+	}
 
 	rq6 := pb.UpdateParams{
 		PostID: 2,
@@ -74,18 +99,33 @@ func main() {
 	}
 	rp6, _ := client.Update(context.Background(), &rq6)
 	fmt.Println(rq6, " -> ", rp6)
+	if(rp6.Error != "BLOG NOT FOUND" && rp6.PostID == 2){
+		fmt.Println("PASS")
+	}else{
+		fmt.Println("FAIL")
+	}
 
 	rq7 := pb.ReadParams{
 		PostID: 1,
 	}
 	rp7, _ := client.Read(context.Background(), &rq7)
 	fmt.Println(rq7, " -> ", rp7)
+	if(rp7.PostID == 1){
+		fmt.Println("PASS")
+	}else{
+		fmt.Println("FAIL")
+	}
 
 	rq8 := pb.ReadParams{
 		PostID: 2,
 	}
 	rp8, _ := client.Read(context.Background(), &rq8)
 	fmt.Println(rq8, " -> ", rp8)
+	if(rp8.PostID == 2){
+		fmt.Println("PASS")
+	}else{
+		fmt.Println("FAIL")
+	}
 
 	rq9 := pb.UpdateParams{
 		PostID: 3,
@@ -97,6 +137,11 @@ func main() {
 	}
 	rp9, _ := client.Update(context.Background(), &rq9)
 	fmt.Println(rq9, " -> ", rp9)
+	if(rp9.Error == "BLOG NOT FOUND"){
+		fmt.Println("PASS")
+	}else{
+		fmt.Println("FAIL")
+	}
 
 	rq10 := pb.CreateParams{
 		Title: "T3",
@@ -107,34 +152,64 @@ func main() {
 	}
 	rp10, _ := client.Create(context.Background(), &rq10)
 	fmt.Println(rq10, " -> ", rp10)
+	if(rp1.PostID == 3){
+		fmt.Println("PASS")
+	}else{
+		fmt.Println("FAIL")
+	}
 
 	rq11 := pb.DeleteParams{
 		PostID: 2,
 	}
 	rp11, _ := client.Delete(context.Background(), &rq11)
 	fmt.Println(rq11, " -> ", rp11)
+	if(rp11.Error == ""){
+		fmt.Println("PASS")
+	}else{
+		fmt.Println("FAIL")
+	}
 
 	rq12 := pb.DeleteParams{
 		PostID: 4,
 	}
 	rp12, _ := client.Delete(context.Background(), &rq12)
 	fmt.Println(rq12, " -> ", rp12)
+	if(rp12.Error == "BLOG NOT FOUND"){
+		fmt.Println("PASS")
+	}else{
+		fmt.Println("FAIL")
+	}
 
 	rq13 := pb.ReadParams{
 		PostID: 1,
 	}
 	rp13, _ := client.Read(context.Background(), &rq13)
 	fmt.Println(rq13, " -> ", rp13)
+	if(rp13.PostID == 1){
+		fmt.Println("PASS")
+	}else{
+		fmt.Println("FAIL")
+	}
 
 	rq14 := pb.ReadParams{
 		PostID: 2,
 	}
 	rp14, _ := client.Read(context.Background(), &rq14)
 	fmt.Println(rq14, " -> ", rp14)
+	if(rp14.Error == "BLOG NOT FOUND"){
+		fmt.Println("PASS")
+	}else{
+		fmt.Println("FAIL")
+	}
 
 	rq15 := pb.ReadParams{
 		PostID: 3,
 	}
 	rp15, _ := client.Read(context.Background(), &rq15)
 	fmt.Println(rq15, " -> ", rp15)
+	if(rp15.PostID == 3){
+		fmt.Println("PASS")
+	}else{
+		fmt.Println("FAIL")
+	}
 }
