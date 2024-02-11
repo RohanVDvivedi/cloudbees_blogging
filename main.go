@@ -19,7 +19,8 @@ type DB struct {
 	Blogs []Blog
 }
 
-// PostID - redundant
+// b.PostID is redundant
+// returns id of the newly inserted blog
 func (db *DB) Create(b Blog) int32 {
 	db.Lock.Lock()
 	defer db.Lock.Unlock()
@@ -28,14 +29,25 @@ func (db *DB) Create(b Blog) int32 {
 	return (int32)(len(db.Blogs)-1)
 }
 
-// returns blog found and bool (set to true if found)
+// returns blog if found and bool (set to true if found)
 func (db *DB) Read(PostID int32) (Blog, bool) {
 	db.Lock.Lock()
 	defer db.Lock.Unlock()
-	if(PostID < (int32)(len(db.Blogs))) {
-		return db.Blogs[PostID], true
+	if(PostID >= (int32)(len(db.Blogs))) {
+		return Blog{}, false
 	}
-	return Blog{}, false
+	return db.Blogs[PostID], true
+}
+
+// returns true, if update successfull
+func (db *DB) Update(b Blog) bool {
+	db.Lock.Lock()
+	defer db.Lock.Unlock()
+	if(b.PostID >= (int32)(len(db.Blogs))) {
+		return false
+	}
+	db.Blogs[b.PostID] = b
+	return true
 }
 
 func main() {
