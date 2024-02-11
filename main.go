@@ -105,6 +105,30 @@ func (s *BloggingService) Read(ctx context.Context, params *ReadParams) (*ReadRe
 	return &ReadResult{Error: "BLOG NOT FOUND"}, nil
 }
 
+func (s *BloggingService) Update(ctx context.Context, params *UpdateParams) (*UpdateResult, error) {
+	b := Blog {
+		PostID: params.PostID,
+		Title: params.Title,
+		Content: params.Content,
+		Author: params.Author,
+		PublicationDate: params.PublicationDate,
+		Tags: params.Tags,
+	}
+	ok := s.db.Update(b)
+	if(ok) {
+		return &UpdateResult{
+			PostID: b.PostID,
+			Title: b.Title,
+			Content: b.Content,
+			Author: b.Author,
+			PublicationDate: b.PublicationDate,
+			Tags: b.Tags,
+			Error: "",
+		}, nil
+	}
+	return &UpdateResult{Error: "BLOG NOT FOUND"}, nil
+}
+
 func main() {
 	//s := BloggingService{db: NewDB()}
 	fmt.Println("Hello World");
