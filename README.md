@@ -18,3 +18,4 @@ This project was built as a part of technical assesment for recruitment process 
  ***note:** do this after you start the server"*
    ```cd cloudbees_blogging/test_client```
    ```go run .```
+ * custom test cases written and they will run on running the test client.
