@@ -10,12 +10,12 @@ This project was built as a part of technical assesment for recruitment process 
 
 ### Server
  * to start the server
-   ```cd cloudbees_blogging```
-   ```go run .```
+  * ```cd cloudbees_blogging```
+  * ```go run .```
 
 ## Test client
  * to run the test_client 
- ***note:** do this after you start the server"*
-   ```cd cloudbees_blogging/test_client```
-   ```go run .```
+  * ***note:** "do this after you start the server"*
+  * ```cd cloudbees_blogging/test_client```
+  * ```go run .```
  * custom test cases written and they will run on running the test client.
