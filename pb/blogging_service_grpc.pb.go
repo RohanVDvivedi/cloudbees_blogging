@@ -4,7 +4,7 @@
 // - protoc             v3.12.4
 // source: blogging_service.proto
 
-package main
+package pb
 
 import (
 	context "context"
