@@ -63,4 +63,78 @@ func main() {
 	}
 	rp5, _ := client.Read(context.Background(), &rq5)
 	fmt.Println(rq5, " -> ", rp5)
+
+	rq6 := pb.UpdateParams{
+		PostID: 2,
+		Title: "T2_2",
+		Content: "C2_2",
+		Author: "A2_2",
+		PublicationDate: "P2_2",
+		Tags: []string{"Tg3_2", "Tg4_2"},
+	}
+	rp6, _ := client.Update(context.Background(), &rq6)
+	fmt.Println(rq6, " -> ", rp6)
+
+	rq7 := pb.ReadParams{
+		PostID: 1,
+	}
+	rp7, _ := client.Read(context.Background(), &rq7)
+	fmt.Println(rq7, " -> ", rp7)
+
+	rq8 := pb.ReadParams{
+		PostID: 2,
+	}
+	rp8, _ := client.Read(context.Background(), &rq8)
+	fmt.Println(rq8, " -> ", rp8)
+
+	rq9 := pb.UpdateParams{
+		PostID: 3,
+		Title: "T2_2",
+		Content: "C2_2",
+		Author: "A2_2",
+		PublicationDate: "P2_2",
+		Tags: []string{"Tg3_2", "Tg4_2"},
+	}
+	rp9, _ := client.Update(context.Background(), &rq9)
+	fmt.Println(rq9, " -> ", rp9)
+
+	rq10 := pb.CreateParams{
+		Title: "T3",
+		Content: "C3",
+		Author: "A3",
+		PublicationDate: "P3",
+		Tags: []string{"Tg5", "Tg6"},
+	}
+	rp10, _ := client.Create(context.Background(), &rq10)
+	fmt.Println(rq10, " -> ", rp10)
+
+	rq11 := pb.DeleteParams{
+		PostID: 2,
+	}
+	rp11, _ := client.Delete(context.Background(), &rq11)
+	fmt.Println(rq11, " -> ", rp11)
+
+	rq12 := pb.DeleteParams{
+		PostID: 4,
+	}
+	rp12, _ := client.Delete(context.Background(), &rq12)
+	fmt.Println(rq12, " -> ", rp12)
+
+	rq13 := pb.ReadParams{
+		PostID: 1,
+	}
+	rp13, _ := client.Read(context.Background(), &rq13)
+	fmt.Println(rq13, " -> ", rp13)
+
+	rq14 := pb.ReadParams{
+		PostID: 2,
+	}
+	rp14, _ := client.Read(context.Background(), &rq14)
+	fmt.Println(rq14, " -> ", rp14)
+
+	rq15 := pb.ReadParams{
+		PostID: 3,
+	}
+	rp15, _ := client.Read(context.Background(), &rq15)
+	fmt.Println(rq15, " -> ", rp15)
 }
