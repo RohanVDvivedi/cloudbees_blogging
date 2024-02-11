@@ -35,7 +35,7 @@ func (db *DB) Create(b Blog) int32 {
 	b.PostID = db.IDsUsed
 	db.Blogs[db.IDsUsed] = b
 	db.IDsUsed++;
-	return (int32)(len(db.Blogs)-1)
+	return b.PostID
 }
 
 // returns blog if found and bool (set to true if found)
