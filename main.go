@@ -11,6 +11,10 @@ import (
 	"google.golang.org/grpc"
 )
 
+import (
+	"cloudbees_blogging/pb"
+)
+
 type Blog struct {
 	PostID int32
     Title string
@@ -76,10 +80,11 @@ func (db *DB) Delete(PostID int32) bool {
 }
 
 type BloggingService struct {
+	pb.UnimplementedBloggingServiceServer
 	db *DB
 }
 
-func (s *BloggingService) Create(ctx context.Context, params *CreateParams) (*CreateResult, error) {
+func (s *BloggingService) Create(ctx context.Context, params *pb.CreateParams) (*pb.CreateResult, error) {
 	b := Blog {
 		Title: params.Title,
 		Content: params.Content,
@@ -88,13 +93,13 @@ func (s *BloggingService) Create(ctx context.Context, params *CreateParams) (*Cr
 		Tags: params.Tags,
 	}
 	PostID := s.db.Create(b)
-	return &CreateResult{PostID: PostID, Error: ""}, nil
+	return &pb.CreateResult{PostID: PostID, Error: ""}, nil
 }
 
-func (s *BloggingService) Read(ctx context.Context, params *ReadParams) (*ReadResult, error) {
+func (s *BloggingService) Read(ctx context.Context, params *pb.ReadParams) (*pb.ReadResult, error) {
 	b, ok := s.db.Read(params.PostID)
 	if(ok) {
-		return &ReadResult{
+		return &pb.ReadResult{
 			PostID: b.PostID,
 			Title: b.Title,
 			Content: b.Content,
@@ -104,10 +109,10 @@ func (s *BloggingService) Read(ctx context.Context, params *ReadParams) (*ReadRe
 			Error: "",
 		}, nil
 	}
-	return &ReadResult{Error: "BLOG NOT FOUND"}, nil
+	return &pb.ReadResult{Error: "BLOG NOT FOUND"}, nil
 }
 
-func (s *BloggingService) Update(ctx context.Context, params *UpdateParams) (*UpdateResult, error) {
+func (s *BloggingService) Update(ctx context.Context, params *pb.UpdateParams) (*pb.UpdateResult, error) {
 	b := Blog {
 		PostID: params.PostID,
 		Title: params.Title,
@@ -118,7 +123,7 @@ func (s *BloggingService) Update(ctx context.Context, params *UpdateParams) (*Up
 	}
 	ok := s.db.Update(b)
 	if(ok) {
-		return &UpdateResult{
+		return &pb.UpdateResult{
 			PostID: b.PostID,
 			Title: b.Title,
 			Content: b.Content,
@@ -128,18 +133,15 @@ func (s *BloggingService) Update(ctx context.Context, params *UpdateParams) (*Up
 			Error: "",
 		}, nil
 	}
-	return &UpdateResult{Error: "BLOG NOT FOUND"}, nil
+	return &pb.UpdateResult{Error: "BLOG NOT FOUND"}, nil
 }
 
-func (s *BloggingService) Delete(ctx context.Context, params *DeleteParams) (*DeleteResult, error) {
+func (s *BloggingService) Delete(ctx context.Context, params *pb.DeleteParams) (*pb.DeleteResult, error) {
 	ok := s.db.Delete(params.PostID)
 	if(ok) {
-		return &DeleteResult{Error: ""}, nil
+		return &pb.DeleteResult{Error: ""}, nil
 	}
-	return &DeleteResult{Error: "BLOG NOT FOUND"}, nil
-}
-
-func (s *BloggingService) mustEmbedUnimplementedBloggingServiceServer() {
+	return &pb.DeleteResult{Error: "BLOG NOT FOUND"}, nil
 }
 
 var port int32 = 6959
@@ -152,6 +154,6 @@ func main() {
 	fmt.Printf("Listening on localhost:%d\n", port)
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
-	RegisterBloggingServiceServer(grpcServer, &BloggingService{db: NewDB()})
+	pb.RegisterBloggingServiceServer(grpcServer, &BloggingService{db: NewDB()})
 	grpcServer.Serve(lis)
 }
