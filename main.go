@@ -3,10 +3,12 @@ package main
 import (
 	"fmt"
 	"sync"
+	"net"
 )
 
 import (
 	"context"
+	"google.golang.org/grpc"
 )
 
 type Blog struct {
@@ -137,7 +139,18 @@ func (s *BloggingService) Delete(ctx context.Context, params *DeleteParams) (*De
 	return &DeleteResult{Error: "BLOG NOT FOUND"}, nil
 }
 
+func (s *BloggingService) mustEmbedUnimplementedBloggingServiceServer() {
+}
+
+var port int32 = 6959
+
 func main() {
-	//s := BloggingService{db: NewDB()}
-	fmt.Println("Hello World");
+	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", port))
+	if err != nil {
+		fmt.Printf("failed to listen: %v", err)
+	}
+	var opts []grpc.ServerOption
+	grpcServer := grpc.NewServer(opts...)
+	RegisterBloggingServiceServer(grpcServer, &BloggingService{db: NewDB()})
+	grpcServer.Serve(lis)
 }
