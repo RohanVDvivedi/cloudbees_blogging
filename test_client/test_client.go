@@ -163,7 +163,7 @@ func main() {
 	}
 	rp10, _ := client.Create(context.Background(), &rq10)
 	fmt.Println(rq10, " -> ", rp10)
-	if(rp1.PostID == 3){
+	if(rp10.PostID == 3){
 		fmt.Println("PASS")
 	}else{
 		fmt.Println("FAIL")
