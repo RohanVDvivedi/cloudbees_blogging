@@ -50,17 +50,17 @@ func main() {
 		PostID: 2,
 	}
 	rp3, _ := client.Read(context.Background(), &rq3)
-	fmt.Println(rq3, " -> ", rp3);
+	fmt.Println(rq3, " -> ", rp3)
 
 	rq4 := pb.ReadParams{
 		PostID: 1,
 	}
 	rp4, _ := client.Read(context.Background(), &rq4)
-	fmt.Println(rq4, " -> ", rp4);
+	fmt.Println(rq4, " -> ", rp4)
 
 	rq5 := pb.ReadParams{
 		PostID: 3,
 	}
 	rp5, _ := client.Read(context.Background(), &rq5)
-	fmt.Println(rq5, " -> ", rp5);
+	fmt.Println(rq5, " -> ", rp5)
 }
