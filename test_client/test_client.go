@@ -26,6 +26,8 @@ func main() {
 	defer conn.Close()
 	client := pb.NewBloggingServiceClient(conn)
 
+	fmt.Println("----TESTS STARTED----")
+
 	rq1 := pb.CreateParams{
 		Title: "T1",
 		Content: "C1",
@@ -54,6 +56,7 @@ func main() {
 		fmt.Println("PASS")
 	}else{
 		fmt.Println("FAIL")
+		return
 	}
 
 	rq3 := pb.ReadParams{
@@ -65,6 +68,7 @@ func main() {
 		fmt.Println("PASS")
 	}else{
 		fmt.Println("FAIL")
+		return
 	}
 
 	rq4 := pb.ReadParams{
@@ -76,6 +80,7 @@ func main() {
 		fmt.Println("PASS")
 	}else{
 		fmt.Println("FAIL")
+		return
 	}
 
 	rq5 := pb.ReadParams{
@@ -87,6 +92,7 @@ func main() {
 		fmt.Println("PASS")
 	}else{
 		fmt.Println("FAIL")
+		return
 	}
 
 	rq6 := pb.UpdateParams{
@@ -103,6 +109,7 @@ func main() {
 		fmt.Println("PASS")
 	}else{
 		fmt.Println("FAIL")
+		return
 	}
 
 	rq7 := pb.ReadParams{
@@ -114,6 +121,7 @@ func main() {
 		fmt.Println("PASS")
 	}else{
 		fmt.Println("FAIL")
+		return
 	}
 
 	rq8 := pb.ReadParams{
@@ -125,6 +133,7 @@ func main() {
 		fmt.Println("PASS")
 	}else{
 		fmt.Println("FAIL")
+		return
 	}
 
 	rq9 := pb.UpdateParams{
@@ -141,6 +150,7 @@ func main() {
 		fmt.Println("PASS")
 	}else{
 		fmt.Println("FAIL")
+		return
 	}
 
 	rq10 := pb.CreateParams{
@@ -167,6 +177,7 @@ func main() {
 		fmt.Println("PASS")
 	}else{
 		fmt.Println("FAIL")
+		return
 	}
 
 	rq12 := pb.DeleteParams{
@@ -178,6 +189,7 @@ func main() {
 		fmt.Println("PASS")
 	}else{
 		fmt.Println("FAIL")
+		return
 	}
 
 	rq13 := pb.ReadParams{
@@ -189,6 +201,7 @@ func main() {
 		fmt.Println("PASS")
 	}else{
 		fmt.Println("FAIL")
+		return
 	}
 
 	rq14 := pb.ReadParams{
@@ -200,6 +213,7 @@ func main() {
 		fmt.Println("PASS")
 	}else{
 		fmt.Println("FAIL")
+		return
 	}
 
 	rq15 := pb.ReadParams{
@@ -211,5 +225,8 @@ func main() {
 		fmt.Println("PASS")
 	}else{
 		fmt.Println("FAIL")
+		return
 	}
+
+	fmt.Println("----ALL TESTS PASSED----")
 }
