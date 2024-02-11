@@ -20,6 +20,14 @@ type DB struct {
 	Blogs map[int32]Blog
 }
 
+// create a new DB
+func NewDB() *DB {
+	return &DB{
+		IDsUsed: 0,
+		Blogs: make(map[int32]Blog),
+	}
+}
+
 // b.PostID is redundant
 // returns id of the newly inserted blog
 func (db *DB) Create(b Blog) int32 {
@@ -61,6 +69,9 @@ func (db *DB) Delete(PostID int32) bool {
 	return true
 }
 
+var db *DB = nil;
+
 func main() {
+	db = NewDB()
 	fmt.Println("Hello World");
 }
