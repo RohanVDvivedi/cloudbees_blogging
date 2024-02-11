@@ -16,7 +16,8 @@ type Blog struct {
 
 type DB struct {
 	Lock sync.Mutex
-	Blogs []Blog
+	IDsUsed int32 // initialized to 0
+	Blogs map[int32]Blog
 }
 
 // b.PostID is redundant
@@ -24,8 +25,9 @@ type DB struct {
 func (db *DB) Create(b Blog) int32 {
 	db.Lock.Lock()
 	defer db.Lock.Unlock()
-	db.Blogs = append(db.Blogs, b)
-	db.Blogs[len(db.Blogs)-1].PostID = (int32)(len(db.Blogs)-1)
+	b.PostID = db.IDsUsed
+	db.Blogs[db.IDsUsed] = b
+	db.IDsUsed++;
 	return (int32)(len(db.Blogs)-1)
 }
 
@@ -33,20 +35,29 @@ func (db *DB) Create(b Blog) int32 {
 func (db *DB) Read(PostID int32) (Blog, bool) {
 	db.Lock.Lock()
 	defer db.Lock.Unlock()
-	if(PostID >= (int32)(len(db.Blogs))) {
-		return Blog{}, false
-	}
-	return db.Blogs[PostID], true
+	b, ok := db.Blogs[PostID]
+	return b, ok
 }
 
 // returns true, if update successfull
 func (db *DB) Update(b Blog) bool {
 	db.Lock.Lock()
 	defer db.Lock.Unlock()
-	if(b.PostID >= (int32)(len(db.Blogs))) {
+	if _, ok := db.Blogs[b.PostID]; !ok {
 		return false
 	}
 	db.Blogs[b.PostID] = b
+	return true
+}
+
+// returns true, if delete successfull
+func (db *DB) Delete(PostID int32) bool {
+	db.Lock.Lock()
+	defer db.Lock.Unlock()
+	if _, ok := db.Blogs[PostID]; !ok {
+		return false
+	}
+	delete(db.Blogs, PostID)
 	return true
 }
 
