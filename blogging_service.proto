@@ -1,4 +1,4 @@
-service Blogging {
+service BloggingService {
     rpc Create(CreateParams) returns (CreateResult) {}
     rpc Read(ReadParams) returns (ReadResult) {}
     rpc Update(UpdateParams) returns (UpdateResult) {}
