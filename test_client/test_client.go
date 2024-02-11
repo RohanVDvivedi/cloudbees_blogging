@@ -41,6 +41,7 @@ func main() {
 		fmt.Println("PASS")
 	}else{
 		fmt.Println("FAIL")
+		return
 	}
 
 	rq2 := pb.CreateParams{
@@ -166,6 +167,7 @@ func main() {
 		fmt.Println("PASS")
 	}else{
 		fmt.Println("FAIL")
+		return
 	}
 
 	rq11 := pb.DeleteParams{
