@@ -149,7 +149,7 @@ func main() {
 	if err != nil {
 		fmt.Printf("failed to listen: %v", err)
 	}
-	fmt.Printf("Listening on localhost:%d", port)
+	fmt.Printf("Listening on localhost:%d\n", port)
 	var opts []grpc.ServerOption
 	grpcServer := grpc.NewServer(opts...)
 	RegisterBloggingServiceServer(grpcServer, &BloggingService{db: NewDB()})
